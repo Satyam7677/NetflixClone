@@ -13,6 +13,7 @@ const App = ()=>{
       <Router/>
       </PersistGate>
     </Provider>
+
   )
 }
 export default App

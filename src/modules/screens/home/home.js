@@ -8,7 +8,9 @@ import {
   TouchableOpacity,
   ImageBackground,
   FlatList,
+
 } from 'react-native';
+import Modal from 'react-native-modal'
 import React from 'react';
 import {useEffect} from 'react';
 
@@ -96,8 +98,9 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1,backgroundColor:'black'}}>
-      
-        <ModalComponent/>
+     
+        <ModalComponent navigation={navigation} />
+        
       
       <ScrollView bounces={false} stickyHeaderIndices={[1]}>
         <View style={Styles.HomeTopView}>

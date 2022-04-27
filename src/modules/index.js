@@ -3,7 +3,7 @@ import {View, Text, SafeAreaView, Image, ScrollView, StyleSheet, TouchableOpacit
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
-import Screen1 from './Screen1'
+import Screen1 from './screen1'
 
 import Splash from './screens/splash'
 import Home from './screens/home'
@@ -14,7 +14,7 @@ import InitialScreen from './screens/initialScreen'
 import SignIn from './screens/signIn'
 import SetUpRouter from './screens/setupNavigation'
 import NewHot from './screens/new&hot'
-import VideoPlayer from './screens/videoPlayer'
+import VideoScreen from './screens/videoPlayer'
 import Downloads from './screens/downloads'
 import FastLaugh from './screens/fastlaughs'
 
@@ -31,7 +31,7 @@ const Router = ()=>{
             <Tab.Screen name= 'Profile' component={Profile}/>
             <Tab.Screen name='Sign In' component={SignIn}/>
             <Tab.Screen name='SetUpRouter' component={SetUpRouter}/>
-            <Tab.Screen name = 'Video Player' component={VideoPlayer}/>
+            <Tab.Screen name = 'Video Player' component={VideoScreen}/>
         </Tab.Navigator>
 
     </NavigationContainer>

@@ -33,8 +33,6 @@ export default function Screen1() {
 
         </BottomTab.Navigator>
 
-        // <BottomTab.Navigator>
-        //     <BottomTab.Screen name='Home' component={Home}/>
-        // </BottomTab.Navigator>
+       
   )
 }
