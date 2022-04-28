@@ -12,13 +12,25 @@ import Modal from 'react-native-modal';
 
 const ModalComponent = ({navigation}) => {
   const {height, width} = Dimensions.get('screen');
-  const {modalVisible, modalData} = useSelector(store => store.reducer);
+  const {modalVisible, modalData,listData} = useSelector(store => store.reducer);
   const dispatch = useDispatch();
 
   const changeModal = () => {
-    console.log('Inside ChangeModal')
+    
     dispatch({type: 'Modal Visible', payload: !modalVisible});
   };
+  const checkData=()=>{
+    const i= listData.findIndex(item=>item.original_title==modalData.original_title)
+    console.log('The index found is ', i)
+    if(i==-1)
+    dispatch({type:'Add_List', payload:modalData})
+    else
+    {
+      listData.splice(i,1)
+      dispatch({type:'Remove_List',payload:listData})
+    }
+  }
+
 
   return (
     <Modal
@@ -98,7 +110,9 @@ const ModalComponent = ({navigation}) => {
 
           <View style={styles.buttonView}>
           <TouchableOpacity
-          style={styles.playButtonView}>
+          style={styles.playButtonView}
+          onPress={
+            checkData}>
             <Image source={require('../../../assets/image/plus.png')} 
             style={styles.imageStyle}/>
             

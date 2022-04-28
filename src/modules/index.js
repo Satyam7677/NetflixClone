@@ -17,6 +17,7 @@ import NewHot from './screens/new&hot'
 import VideoScreen from './screens/videoPlayer'
 import Downloads from './screens/downloads'
 import FastLaugh from './screens/fastlaughs'
+import MyList from './screens/myList'
 
 
 const Tab = createNativeStackNavigator()
@@ -31,6 +32,7 @@ const Router = ()=>{
             <Tab.Screen name= 'Profile' component={Profile}/>
             <Tab.Screen name='Sign In' component={SignIn}/>
             <Tab.Screen name='SetUpRouter' component={SetUpRouter}/>
+            <Tab.Screen name ='MyList' component={MyList}/>
             <Tab.Screen name = 'Video Player' component={VideoScreen}/>
         </Tab.Navigator>
 

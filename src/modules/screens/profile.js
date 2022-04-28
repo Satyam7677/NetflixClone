@@ -90,7 +90,8 @@ const Profile=({navigation})=> {
         
       </View>
     <TouchableOpacity 
-    style={Styles.myListView}>
+    style={Styles.myListView}
+    onPress={()=>navigation.navigate('MyList')}>
       <Image source={require('../../assets/image/basic-tick.png')} style={Styles.tickIcon}/>
       <Text style={Styles.myListText}>{'My List'}</Text>
     </TouchableOpacity>
