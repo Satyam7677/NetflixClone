@@ -16,6 +16,7 @@ const initialState={
     madeInIndia:[],
     hollywood:[],
     releasedPastYear:[],
+    moreLikeThis:[],
     modalVisible:false,
     modalData:{}
 
@@ -58,6 +59,8 @@ const reducer =(state=initialState, action)=>{
             return{...state,tvSciFi:[...state.tvSciFi,...payload]}
         case 'Young Adult':
             return{...state,youndAdult:[...state.youndAdult,...payload]}
+        case 'MoreLikeThis':
+            return{...state,moreLikeThis:[...state.moreLikeThis,...payload]}
         case 'Modal Visible':
             return{...state,modalVisible:payload}
          case 'Modal Data':
