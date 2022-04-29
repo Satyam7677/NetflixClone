@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { TouchableOpacity, Text,SafeAreaView , View,StyleSheet} from 'react-native'
 import Video from 'react-native-video'
-import VideoPlayer from 'react-native-video-player'
+
 
 const VideoScreen=({navigation})=>{
+    
     return (
-        <SafeAreaView style={Styles.mainView}>
+        <SafeAreaView style={Styles.mainView} >
+            
             <TouchableOpacity
             onPress={()=>navigation.goBack()}>
             <Text style={Styles.text}>{'Go Back'}</Text>
@@ -18,6 +20,7 @@ const VideoScreen=({navigation})=>{
             fullscreen={true}
             fullscreenAutorotate={true}
             fullscreenOrientation={'landscape'}
+            
             />
 
 

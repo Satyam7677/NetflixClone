@@ -13,39 +13,53 @@ import {
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import MoreLikeThis from '../components/moreLikeThis';
 import ModalComponent from '../components/modal';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Stack = createMaterialTopTabNavigator();
 
 const {height, width} = Dimensions.get('screen');
-const InfoScreen = ({navigation, route}) => {
-  const {
-    backdrop_path,
-    original_title,
-    overview,
-    release_date,
-    vote_average,
-    adult,
-  } = route.params.modalData;
 
-  const data = [
-    {
-      backdrop_path,
-      original_title,
-      overview,
-      release_date,
-      vote_average,
-      adult,
-    },
-  ];
+const InfoScreen = ({navigation, route}) => {
+    const dispatch=useDispatch()
+    const {listData}= useSelector(store=>store.reducer)
+    
+  const {
+   modalData
+  } = route.params;
+
+  const data =[modalData]
+  
 
   const renderItem = ({}) => {
+
+    const checkList=()=>{
+        const i= listData.findIndex(item=>item.original_title==modalData.original_title)
+        if(i==-1)
+        return false
+        else
+        return true
+      }
+
+      const checkData=()=>{
+        const i= listData.findIndex(item=>item.original_title==modalData.original_title)
+        console.log('The index found is ', i)
+        if(i==-1)
+        dispatch({type:'Add_List', payload:modalData})
+        else
+        {
+          listData.splice(i,1)
+          dispatch({type:'Remove_List',payload:listData})
+        }
+      }
+
+
     return (
       <SafeAreaView>
-        <Text style={Styles.movieName}>{original_title}</Text>
+        <Text style={Styles.movieName}>{modalData.original_title}</Text>
         <View style={Styles.movieDetailsView}>
-          <Text style={Styles.movieDetails}>{release_date}</Text>
-          <Text style={Styles.movieDetails}>{adult ? 'A' : 'U/A 16+'}</Text>
-          <Text style={Styles.movieDetails}>{vote_average}</Text>
+          <Text style={Styles.movieDetails}>{modalData.release_date}</Text>
+          <Text style={Styles.movieDetails}>{modalData.adult ? 'A' : 'U/A 16+'}</Text>
+          <Text style={Styles.movieDetails}>{modalData.vote_average}</Text>
         </View>
 
         <TouchableOpacity style={Styles.buttonView}
@@ -69,7 +83,7 @@ const InfoScreen = ({navigation, route}) => {
             <Text style={Styles.buttonText}>{'Download'}</Text>
           </View>
         </TouchableOpacity>
-        <Text style={Styles.overViewText}>{overview}</Text>
+        <Text style={Styles.overViewText}>{modalData.overview}</Text>
         <View
           style={{
             ...Styles.movieDetailsView,
@@ -77,7 +91,9 @@ const InfoScreen = ({navigation, route}) => {
             padding: 10,
             width: 200,
           }}>
-          <Image source={require('../../../assets/image/plus.png')} />
+            <TouchableOpacity onPress={checkData}>
+          <Image source={checkList()?require('../../../assets/image/tick.png'):require('../../../assets/image/plus.png')}  />
+          </TouchableOpacity>
           <Image source={require('../../../assets/image/like.png')} />
           <Image source={require('../../../assets/image/share.png')} />
         </View>
@@ -121,7 +137,8 @@ const InfoScreen = ({navigation, route}) => {
           <Image source={require('../../../assets/image/back.png')} />
         </TouchableOpacity>
 
-        <TouchableOpacity style={Styles.searchImage}>
+        <TouchableOpacity style={Styles.searchImage}
+        onPress={()=>navigation.navigate('SearchScreen')}>
           <Image source={require('../../../assets/image/search.png')} />
         </TouchableOpacity>
         <TouchableOpacity
@@ -133,9 +150,9 @@ const InfoScreen = ({navigation, route}) => {
           />
         </TouchableOpacity>
       </View>
-      <View style={{width: width, height: height / 4}}>
+      <View style={{width: width, height: height / 4,marginBottom:10}}>
         <Image
-          source={{uri: `https://image.tmdb.org/t/p/w500${backdrop_path}`}}
+          source={{uri: `https://image.tmdb.org/t/p/w500${modalData.backdrop_path}`}}
           style={Styles.imageStyle}
         />
       </View>

@@ -18,6 +18,8 @@ import VideoScreen from './screens/videoPlayer'
 import Downloads from './screens/downloads'
 import FastLaugh from './screens/fastlaughs'
 import MyList from './screens/myList'
+import SearchScreen from './screens/search'
+import InfoScreen from './screens/home/info'
 
 
 const Tab = createNativeStackNavigator()
@@ -34,6 +36,8 @@ const Router = ()=>{
             <Tab.Screen name='SetUpRouter' component={SetUpRouter}/>
             <Tab.Screen name ='MyList' component={MyList}/>
             <Tab.Screen name = 'Video Player' component={VideoScreen}/>
+            <Tab.Screen name = 'SearchScreen' component={SearchScreen}/>
+            <Tab.Screen name = 'InfoScreen' component={InfoScreen}/>
         </Tab.Navigator>
 
     </NavigationContainer>

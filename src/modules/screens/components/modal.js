@@ -10,6 +10,8 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import Modal from 'react-native-modal';
 
+
+
 const ModalComponent = ({navigation}) => {
   const {height, width} = Dimensions.get('screen');
   const {modalVisible, modalData,listData} = useSelector(store => store.reducer);
@@ -31,11 +33,19 @@ const ModalComponent = ({navigation}) => {
     }
   }
 
+const checkList=()=>{
+  const i= listData.findIndex(item=>item.original_title==modalData.original_title)
+  if(i==-1)
+  return false
+  else
+  return true
+}
+
 
   return (
     <Modal
     style={{alignSelf: 'center', justifyContent: 'flex-end'}}
-    // visible={modalVisible}
+
     animationType={'slide'}
     visible={modalVisible}
     backdropColor={'black'}
@@ -113,7 +123,7 @@ const ModalComponent = ({navigation}) => {
           style={styles.playButtonView}
           onPress={
             checkData}>
-            <Image source={require('../../../assets/image/plus.png')} 
+            <Image source={checkList()?require('../../../assets/image/tick.png'):require('../../../assets/image/plus.png')} 
             style={styles.imageStyle}/>
             
           </TouchableOpacity>

@@ -82,10 +82,12 @@ const HomeScreen = ({navigation}) => {
   const StickyHeaderComponent = () => {
     return (
       <View style={Styles.HomeNavigationView}>
-        <TouchableOpacity>
+        <TouchableOpacity 
+         onPress={()=>navigation.navigate('TVShowScreen')}>
           <Text style={Styles.headerText}>{'TV Shows'}</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity
+        onPress={()=>navigation.navigate('MovieScreen')}>
           <Text style={Styles.headerText}>{'Movies'}</Text>
         </TouchableOpacity>
         <TouchableOpacity>
@@ -108,7 +110,8 @@ const HomeScreen = ({navigation}) => {
             source={require('../../../assets/image/netflix.png')}
             style={Styles.netflixImage}
           />
-          <TouchableOpacity style={Styles.searchImage}>
+          <TouchableOpacity style={Styles.searchImage}
+          onPress={()=>navigation.navigate('SearchScreen')}>
             <Image source={require('../../../assets/image/search.png')} />
           </TouchableOpacity>
           <TouchableOpacity

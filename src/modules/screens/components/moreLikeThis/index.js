@@ -44,7 +44,7 @@ const MoreLikeThis=({navigation})=>{
       
 
     return(
-      // <SafeAreaView style={{backgroundColor:'black'}}>
+
         <FlatList
         data={moreLikeThis}
         renderItem={RenderItem}
@@ -53,7 +53,7 @@ const MoreLikeThis=({navigation})=>{
         ListEmptyComponent={()=><Text style={{color:'white'}}>{'Loading'}</Text>}
         keyExtractor={(item,index)=>item.index}
         />
-        // </SafeAreaView>
+
     )
 }
 export default MoreLikeThis
