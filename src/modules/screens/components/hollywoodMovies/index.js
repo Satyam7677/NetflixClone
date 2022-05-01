@@ -1,7 +1,7 @@
 import React from "react";
 import {FlatList,StyleSheet, TouchableOpacity, Image, Text} from 'react-native'
 import { useSelector ,useDispatch} from "react-redux";
-
+import { Styles } from "../backToback";
 
 const HollywoodMovies=({navigation})=>{
     const {hollywood,modalVisible}=useSelector((store)=>store.reducer)
@@ -33,6 +33,9 @@ const HollywoodMovies=({navigation})=>{
       
 
     return(
+
+<>
+      <Text style={Styles.flatListText}>{'Hollywood Movies'}</Text>
         <FlatList
         data={hollywood}
         renderItem={RenderItem}
@@ -40,26 +43,10 @@ const HollywoodMovies=({navigation})=>{
         ListEmptyComponent={()=><Text style={{color:'white'}}>{'Loading'}</Text>}
         keyExtractor={(item,index)=>item.index}
         />
+        </>
     )
 }
 export default HollywoodMovies
 
-
-const Styles= StyleSheet.create(
-    {
-        renderItemView: {
-            overflow: 'hidden',
-            height: 150,
-            width: 110,
-            
-          },
-          flatListImage: {
-            height: '100%',
-            width: '100%',
-            resizeMode: 'contain',
-            borderRadius:10
-          },
-    }
-)
 
 

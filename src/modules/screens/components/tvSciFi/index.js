@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {FlatList,StyleSheet, TouchableOpacity, Image, Text} from 'react-native'
 import { useSelector,useDispatch } from "react-redux";
+import { Styles } from "../backToback";
+import InternationalTVShows from "../internationalTvShows";
+import getInternationalTVShows from "../internationalTvShows/action";
 
-
-const TVSciFi=()=>{
+const TVSciFi=({navigation})=>{
     const {tvSciFi,modalVisible}=useSelector((store)=>store.reducer)
     const dispatch= useDispatch()
+
+
+    useEffect(()=>{dispatch(getInternationalTVShows())},[])
+
+
+
     const RenderItem = ({item}) => {
         // const navigation = useNavigation()
         const changeModal=()=>{
@@ -32,31 +40,20 @@ const TVSciFi=()=>{
       
 
     return(
+<>
+      <Text style={Styles.flatListText}>{'TV Sci-Fi & Horror'}</Text>
         <FlatList
         data={tvSciFi}
         renderItem={RenderItem}
         horizontal
         keyExtractor={(item,index)=>item.index}
+        ListEmptyComponent={()=><Text style={{color:'white'}}>{'Loading'}</Text>}
         />
+         <InternationalTVShows navigation={navigation}/>
+        </>
     )
 }
 export default TVSciFi
 
-const Styles= StyleSheet.create(
-    {
-        renderItemView: {
-            overflow: 'hidden',
-            height: 150,
-            width: 110,
-            
-          },
-          flatListImage: {
-            height: '100%',
-            width: '100%',
-            resizeMode: 'contain',
-            borderRadius:10
-          },
-    }
-)
 
 

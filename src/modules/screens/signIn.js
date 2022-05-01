@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import {View, SafeAreaView, Text, TouchableOpacity,StyleSheet, Image,TextInput, Alert} from 'react-native'
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 
 const SignIn = ({navigation})=>{
-    // return (
-    //     <SafeAreaView>
-    //         <Text>helo</Text>
-    //     </SafeAreaView>
-    // )
+   const dispatch = useDispatch()
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
-    const {data} = useSelector((store)=>store.signUpReducer)
+    const {data,isSignedIn} = useSelector((store)=>store.signUpReducer)
     console.log("Inside SignIN",data)
 
     const checkAuth=()=>{
       if( data.find(i=>i.email==email && i.password==password))
-        navigation.navigate('Screen1')
+        {   
+            dispatch({type:'Sign_In', payload:!isSignedIn})
+            navigation.navigate('Screen1')}
         // navigation.navigate('Profile')
         else
         Alert.alert('Wrong credentials')

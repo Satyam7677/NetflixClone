@@ -4,7 +4,9 @@ import { useSelector,useDispatch } from "react-redux";
 import ModalComponent from "./components/modal";
 
 const MyList =({navigation})=>{
-    const {listData,modalVisible} = useSelector(store=>store.reducer)
+    const {modalVisible} = useSelector(store=>store.reducer)
+  const {listData} = useSelector(store=>store.signUpReducer)
+
     const dispatch=useDispatch()
     console.log('List data is', listData)
 
@@ -44,7 +46,8 @@ const MyList =({navigation})=>{
         </TouchableOpacity>
         <Text style={Styles.listText}>{'My List'}</Text>
 
-        <TouchableOpacity style={Styles.searchImage}>
+        <TouchableOpacity style={Styles.searchImage}
+        onPress={()=>navigation.navigate('SearchScreen')}>
           <Image source={require('../../assets/image/search.png')} />
         </TouchableOpacity>
       </View>

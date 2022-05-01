@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {FlatList,StyleSheet, TouchableOpacity, Image, Text,View} from 'react-native'
 import { useDispatch, useSelector } from "react-redux";
 import Modal from 'react-native-modal'
+import TrendingNow from "../trendingNow";
+import getTrendingNow from "../trendingNow/action";
 
 const BackToback=({navigation})=>{
     const {backToBack,modalVisible}=useSelector((store)=>store.reducer)
     const dispatch= useDispatch()
+
+    useEffect(()=>{
+      dispatch(getTrendingNow())
+    },[])
     
 
 
@@ -20,6 +26,7 @@ const BackToback=({navigation})=>{
       
           return (
             <>
+            
             <TouchableOpacity style={Styles.renderItemView}
               onPress={changeModal}
             >
@@ -36,6 +43,10 @@ const BackToback=({navigation})=>{
       
 
     return(
+      <>
+      <Text style={Styles.flatListText}>
+      {'Members Watch Episodes Back-to-Back'}
+    </Text>
         <FlatList
         data={backToBack}
         renderItem={RenderItem}
@@ -43,6 +54,9 @@ const BackToback=({navigation})=>{
         ListEmptyComponent={()=><Text style={{color:'white'}}>{'Loading'}</Text>}
         keyExtractor={(item,index)=>item.index}
         />
+
+        <TrendingNow navigation={navigation}/>
+        </>
     )
 }
 export default BackToback
@@ -62,8 +76,17 @@ const Styles= StyleSheet.create(
             resizeMode: 'contain',
             borderRadius:10
           },
+          flatListText: {
+            color: 'white',
+            fontSize: 20,
+            fontWeight: '700',
+            marginTop: 15,
+            marginBottom: 5,
+          }
     }
 )
+
+export {Styles}
 
 
 

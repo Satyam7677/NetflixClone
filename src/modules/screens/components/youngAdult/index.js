@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {FlatList,StyleSheet, TouchableOpacity, Image, Text} from 'react-native'
 import { useSelector,useDispatch } from "react-redux";
+import { Styles } from "../backToback";
+import MadeInIndia from "../madeInIndia";
+import getMadeInIndia from "../madeInIndia/action";
 
-
-const YoungAdult=()=>{
+const YoungAdult=({navigation})=>{
     const {youndAdult,modalVisible}=useSelector((store)=>store.reducer)
     const dispatch= useDispatch()
+
+    useEffect(()=>{dispatch(getMadeInIndia())},[])
    
     const RenderItem = ({item}) => {
         // const navigation = useNavigation()
@@ -33,31 +37,18 @@ const YoungAdult=()=>{
       
 
     return(
+<>
+      <Text style={Styles.flatListText}>{'Young Adult Movies & Shows'}</Text>
         <FlatList
         data={youndAdult}
         renderItem={RenderItem}
         horizontal
         keyExtractor={(item,index)=>item.index}
         />
+        <MadeInIndia navigation={navigation}/>
+        </>
     )
 }
 export default YoungAdult
-
-const Styles= StyleSheet.create(
-    {
-        renderItemView: {
-            overflow: 'hidden',
-            height: 150,
-            width: 110,
-            
-          },
-          flatListImage: {
-            height: '100%',
-            width: '100%',
-            resizeMode: 'contain',
-            borderRadius:10
-          },
-    }
-)
 
 

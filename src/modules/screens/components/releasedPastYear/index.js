@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {FlatList,StyleSheet, TouchableOpacity, Image, Text} from 'react-native'
 import { useSelector ,useDispatch} from "react-redux";
+import { Styles } from "../backToback";
+import Anime from "../anime";
+import getAnime from "../anime/action";
 
 
 const ReleasedPastYear=({navigation})=>{
     const {releasedPastYear,modalVisible}=useSelector((store)=>store.reducer)
     const dispatch= useDispatch()
+
+    useEffect(()=>{dispatch(getAnime())},[])
 
     const RenderItem = ({item}) => {
       const changeModal=()=>{
@@ -32,6 +37,8 @@ const ReleasedPastYear=({navigation})=>{
       
 
     return(
+      <>
+       <Text style={Styles.flatListText}>{'Released in the Past Year'}</Text>
         <FlatList
         data={releasedPastYear}
         renderItem={RenderItem}
@@ -39,26 +46,10 @@ const ReleasedPastYear=({navigation})=>{
         ListEmptyComponent={()=><Text style={{color:'white'}}>{'Loading'}</Text>}
         keyExtractor={(item,index)=>item.index}
         />
+        <Anime navigation={navigation}/>
+        </>
     )
 }
 export default ReleasedPastYear
-
-
-const Styles= StyleSheet.create(
-    {
-        renderItemView: {
-            overflow: 'hidden',
-            height: 150,
-            width: 110,
-            
-          },
-          flatListImage: {
-            height: '100%',
-            width: '100%',
-            resizeMode: 'contain',
-            borderRadius:10
-          },
-    }
-)
 
 

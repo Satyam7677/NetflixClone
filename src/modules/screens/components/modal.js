@@ -14,7 +14,8 @@ import Modal from 'react-native-modal';
 
 const ModalComponent = ({navigation}) => {
   const {height, width} = Dimensions.get('screen');
-  const {modalVisible, modalData,listData} = useSelector(store => store.reducer);
+  const {modalVisible, modalData} = useSelector(store => store.reducer);
+  const {listData} = useSelector(store=>store.signUpReducer)
   const dispatch = useDispatch();
 
   const changeModal = () => {
@@ -34,6 +35,7 @@ const ModalComponent = ({navigation}) => {
   }
 
 const checkList=()=>{
+  
   const i= listData.findIndex(item=>item.original_title==modalData.original_title)
   if(i==-1)
   return false

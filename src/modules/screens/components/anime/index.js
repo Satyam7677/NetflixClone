@@ -1,12 +1,16 @@
-import React from "react";
+import React,{useEffect} from "react";
 import {FlatList,StyleSheet, TouchableOpacity, Image, Text} from 'react-native'
 import { useSelector,useDispatch } from "react-redux";
+import { Styles } from "../backToback";
+import Top10India from "../top10India";
+import getTop10India from "../top10India/action";
 
 
 const Anime=({navigation})=>{
     const {anime,modalVisible}=useSelector((store)=>store.reducer)
     const dispatch= useDispatch()
 
+    useEffect(()=>{dispatch(getTop10India())},[])
 
     const RenderItem = ({item}) => {
       const changeModal=()=>{
@@ -31,6 +35,9 @@ const Anime=({navigation})=>{
       
 
     return(
+      <>
+       <Text style={Styles.flatListText}>{'Anime'}</Text>
+      
         <FlatList
         data={anime}
         renderItem={RenderItem}
@@ -38,26 +45,12 @@ const Anime=({navigation})=>{
         ListEmptyComponent={()=><Text style={{color:'white'}}>{'Loading'}</Text>}
         keyExtractor={(item,index)=>item.index}
         />
+         <Top10India navigation={navigation}/>
+        </>
     )
 }
 export default Anime
 
 
-const Styles= StyleSheet.create(
-    {
-        renderItemView: {
-            overflow: 'hidden',
-            height: 150,
-            width: 110,
-            
-          },
-          flatListImage: {
-            height: '100%',
-            width: '100%',
-            resizeMode: 'contain',
-            borderRadius:10
-          },
-    }
-)
 
 

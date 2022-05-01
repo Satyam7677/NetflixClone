@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {FlatList,StyleSheet, TouchableOpacity, Image, Text} from 'react-native'
 import { useSelector ,useDispatch} from "react-redux";
-
+import { Styles } from "../backToback";
+import HollywoodMovies from "../hollywoodMovies";
+import getHollywoodMovies from "../hollywoodMovies/action";
 
 const MadeInIndia=({navigation})=>{
     const {madeInIndia,modalVisible}=useSelector((store)=>store.reducer)
     const dispatch= useDispatch()
+
+    useEffect(()=>{dispatch(getHollywoodMovies())},[])
 
     const RenderItem = ({item}) => {
 
@@ -33,6 +37,8 @@ const MadeInIndia=({navigation})=>{
       
 
     return(
+<>
+      <Text style={Styles.flatListText}>{'Made in India'}</Text>
         <FlatList
         data={madeInIndia}
         renderItem={RenderItem}
@@ -40,26 +46,10 @@ const MadeInIndia=({navigation})=>{
         ListEmptyComponent={()=><Text style={{color:'white'}}>{'Loading'}</Text>}
         keyExtractor={(item,index)=>item.index}
         />
+        <HollywoodMovies navigation={navigation}/>
+        </>
     )
 }
 export default MadeInIndia
-
-
-const Styles= StyleSheet.create(
-    {
-        renderItemView: {
-            overflow: 'hidden',
-            height: 150,
-            width: 110,
-            
-          },
-          flatListImage: {
-            height: '100%',
-            width: '100%',
-            resizeMode: 'contain',
-            borderRadius:10
-          },
-    }
-)
 
 

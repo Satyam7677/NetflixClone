@@ -3,16 +3,18 @@ import {View, SafeAreaView, Text, Image, StyleSheet, TouchableOpacity} from 'rea
 import Modal from 'react-native-modal'
 
 
-const MovieModal =({navigation,modalVisible,setModalVisible ,movies})=>{
-    console.log('Navigation is ',navigation)
+const MovieModal =({navigation,modalVisible,setModalVisible ,movies,categories})=>{
+
     return (
         
 
         <Modal
         isVisible={modalVisible}
         >
-            <View style={Styles.optionViewStyle}>
-                <TouchableOpacity>
+            
+           {!categories && <View style={Styles.optionViewStyle}>
+                <TouchableOpacity
+                onPress={()=>navigation.navigate('HomeScreen')}>
                 <Text style={{color:'white'}}>{'Home'}</Text>
                 </TouchableOpacity>
 
@@ -30,18 +32,35 @@ const MovieModal =({navigation,modalVisible,setModalVisible ,movies})=>{
                 <Text style={{color:'white',fontWeight:movies?'800':'normal'}}>{'Movies'}</Text>
                 </TouchableOpacity>
 
-            </View>
-            <TouchableOpacity 
-            style={Styles.crossButttonView}
-            onPress={()=>setModalVisible(!modalVisible)}>
-                <Image source={require('../../../../assets/image/blackClose.png')} style={Styles.crossImage}/>
-                </TouchableOpacity>
+            </View>}
+
+                <ModalMainPart setModalVisible={setModalVisible} modalVisible={modalVisible}/>
+
+
         </Modal>
 
         
     )
 }
 export default MovieModal
+
+
+
+
+
+const ModalMainPart=({modalVisible,setModalVisible})=>{
+    return(
+        <>
+        
+            <TouchableOpacity 
+            style={Styles.crossButttonView}
+            onPress={()=>setModalVisible(!modalVisible)}>
+                <Image source={require('../../../../assets/image/blackClose.png')} style={Styles.crossImage}/>
+                </TouchableOpacity>
+                </>
+    )
+}
+
 
 const Styles= StyleSheet.create(
     {

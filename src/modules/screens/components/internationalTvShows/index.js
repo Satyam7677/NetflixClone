@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {FlatList,StyleSheet, TouchableOpacity, Image, Text} from 'react-native'
 import { useSelector,useDispatch } from "react-redux";
-
+import { Styles } from "../backToback";
+import PeriodPieces from "../periodPieces";
+import getPeriodPieces from "../periodPieces/action";
 
 const InternationalTVShows=({navigation})=>{
     const {internationalTV,modalVisible}=useSelector((store)=>store.reducer)
     const dispatch= useDispatch()
+
+    useEffect(()=>{
+        dispatch(getPeriodPieces())
+    },[])
 
     const RenderItem = ({item}) => {
 
@@ -33,6 +39,8 @@ const InternationalTVShows=({navigation})=>{
       
 
     return(
+      <>
+      <Text style={Styles.flatListText}>{'International TV Shows'}</Text>
         <FlatList
         data={internationalTV}
         renderItem={RenderItem}
@@ -40,26 +48,13 @@ const InternationalTVShows=({navigation})=>{
         ListEmptyComponent={()=><Text style={{color:'white'}}>{'Loading'}</Text>}
         keyExtractor={(item,index)=>item.index}
         />
+        <PeriodPieces navigation={navigation}/>
+        </>
     )
 }
 export default InternationalTVShows
 
 
-const Styles= StyleSheet.create(
-    {
-        renderItemView: {
-            overflow: 'hidden',
-            height: 150,
-            width: 110,
-            
-          },
-          flatListImage: {
-            height: '100%',
-            width: '100%',
-            resizeMode: 'contain',
-            borderRadius:10
-          },
-    }
-)
+
 
 

@@ -1,11 +1,19 @@
-import React from "react";
+import React,{useEffect} from "react";
 import {FlatList,StyleSheet, TouchableOpacity, Image, Text} from 'react-native'
 import { useSelector,useDispatch } from "react-redux";
+import { Styles } from "../backToback";
+import NewRelease from "../newReleases";
+import getNewReleases from "../newReleases/action";
 
 
-const TrendingNow=()=>{
+const TrendingNow=({navigation})=>{
     const {trendingNow,modalVisible}=useSelector((store)=>store.reducer)
     const dispatch= useDispatch()
+
+    useEffect(()=>{
+      dispatch(getNewReleases())
+    },[])
+
     const RenderItem = ({item}) => {
         // const navigation = useNavigation()
         const changeModal=()=>{
@@ -33,31 +41,20 @@ const TrendingNow=()=>{
       
 
     return(
+      <>
+      <Text style={Styles.flatListText}>{'Trending Now'}</Text>
         <FlatList
         data={trendingNow}
         renderItem={RenderItem}
         horizontal
         keyExtractor={(item,index)=>item.index}
         />
+        <NewRelease navigation={navigation}/>
+        </>
     )
 }
 export default TrendingNow
 
-const Styles= StyleSheet.create(
-    {
-        renderItemView: {
-            overflow: 'hidden',
-            height: 150,
-            width: 110,
-            
-          },
-          flatListImage: {
-            height: '100%',
-            width: '100%',
-            resizeMode: 'contain',
-            borderRadius:10
-          },
-    }
-)
+
 
 

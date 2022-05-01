@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {FlatList,StyleSheet, TouchableOpacity, Image, Text} from 'react-native'
 import { useSelector,useDispatch } from "react-redux";
+import { Styles } from "../backToback";
+import OnlyOnNetflix from "../onlyOnNetflix";
+import getOnlyOnNetflix from "../onlyOnNetflix/action";
 
 
 const BollywoodMovies=({navigation})=>{
     const {bollywood,modalVisible}=useSelector((store)=>store.reducer)
     const dispatch= useDispatch()
   
+    useEffect(()=>{dispatch(getOnlyOnNetflix())},[])
 
     const RenderItem = ({item}) => {
 
@@ -33,6 +37,9 @@ const BollywoodMovies=({navigation})=>{
       
 
     return(
+      <>
+
+      <Text style={Styles.flatListText}>{'Bollywood Movies'}</Text>
         <FlatList
         data={bollywood}
         renderItem={RenderItem}
@@ -40,26 +47,10 @@ const BollywoodMovies=({navigation})=>{
         ListEmptyComponent={()=><Text style={{color:'white'}}>{'Loading'}</Text>}
         keyExtractor={(item,index)=>item.index}
         />
+        <OnlyOnNetflix navigation={navigation}/>
+        </>
     )
 }
 export default BollywoodMovies
-
-
-const Styles= StyleSheet.create(
-    {
-        renderItemView: {
-            overflow: 'hidden',
-            height: 150,
-            width: 110,
-            
-          },
-          flatListImage: {
-            height: '100%',
-            width: '100%',
-            resizeMode: 'contain',
-            borderRadius:10
-          },
-    }
-)
 
 

@@ -1,8 +1,14 @@
 import React from 'react'
 import {View, Text, SafeAreaView, StyleSheet, Image} from 'react-native'
+import { useSelector } from 'react-redux'
+
 
 const Splash=({navigation})=>{
+    const {isSignedIn} = useSelector(store=>store.signUpReducer)
     setTimeout(()=>{
+        if(isSignedIn)
+        navigation.navigate('Screen1')
+        else
         navigation.navigate('Initial Screen')
     }, 1000)
     return(

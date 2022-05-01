@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {FlatList,StyleSheet, TouchableOpacity, Image, Text} from 'react-native'
 import { useSelector,useDispatch } from "react-redux";
-
+import { Styles } from "../backToback";
+import PopularOnNetflix from "../popularOnNetflix";
+import getPopularOnNetflix from "../popularOnNetflix/action";
 
 const OnlyOnNetflix=({navigation})=>{
     const {onlyOnNetflix,modalVisible}=useSelector((store)=>store.reducer)
     const dispatch= useDispatch()
+
+    useEffect(()=>{dispatch(getPopularOnNetflix())},[])
 
     const RenderItem = ({item}) => {
       const changeModal=()=>{
@@ -34,6 +38,8 @@ const OnlyOnNetflix=({navigation})=>{
       
 
     return(
+      <>
+      <Text style={Styles.flatListText}>{'Only on Netflix'}</Text>
         <FlatList
         data={onlyOnNetflix}
         renderItem={RenderItem}
@@ -41,26 +47,14 @@ const OnlyOnNetflix=({navigation})=>{
         ListEmptyComponent={()=><Text style={{color:'white'}}>{'Loading'}</Text>}
         keyExtractor={(item,index)=>item.index}
         />
+        <PopularOnNetflix navigation={navigation}/>
+
+        </>
     )
 }
 export default OnlyOnNetflix
 
 
-const Styles= StyleSheet.create(
-    {
-        renderItemView: {
-            overflow: 'hidden',
-            height: 150,
-            width: 110,
-            
-          },
-          flatListImage: {
-            height: '100%',
-            width: '100%',
-            resizeMode: 'contain',
-            borderRadius:10
-          },
-    }
-)
+
 
 

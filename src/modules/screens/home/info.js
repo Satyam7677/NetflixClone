@@ -21,7 +21,7 @@ const {height, width} = Dimensions.get('screen');
 
 const InfoScreen = ({navigation, route}) => {
     const dispatch=useDispatch()
-    const {listData}= useSelector(store=>store.reducer)
+    const {listData}= useSelector(store=>store.signUpReducer)
     
   const {
    modalData

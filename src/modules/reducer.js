@@ -17,7 +17,6 @@ const initialState={
     hollywood:[],
     releasedPastYear:[],
     moreLikeThis:[],
-    listData:[],
     modalVisible:false,
     modalData:{}
 
@@ -62,15 +61,6 @@ const reducer =(state=initialState, action)=>{
             return{...state,youndAdult:[...state.youndAdult,...payload]}
         case 'MoreLikeThis':
             return{...state,moreLikeThis:[...state.moreLikeThis,...payload]}
-        case 'Add_List':
-            return{
-                ...state,listData:[...state.listData,payload]
-            }
-        case 'Remove_List':
-            return{
-                ...state,listData:payload
-            }
-        
         case 'Modal Visible':
             return{...state,modalVisible:payload}
          case 'Modal Data':

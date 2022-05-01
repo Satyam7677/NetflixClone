@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {FlatList,StyleSheet, TouchableOpacity, Image, Text} from 'react-native'
 import { useSelector, useDispatch } from "react-redux";
-
+import { Styles } from "../backToback";
+import YoungAdult from "../youngAdult";
+import getYoungAdult from "../youngAdult/action";
 
 const PeriodPieces=({navigation})=>{
     const {periodPieces,modalVisible}=useSelector((store)=>store.reducer)
     const dispatch= useDispatch()
+
+
+    useEffect(()=>{dispatch(getYoungAdult())},[])
 
     const RenderItem = ({item}) => {
 
@@ -34,6 +39,8 @@ const PeriodPieces=({navigation})=>{
       
 
     return(
+<>
+      <Text style={Styles.flatListText}>{'Period Pieces'}</Text>
         <FlatList
         data={periodPieces}
         renderItem={RenderItem}
@@ -41,26 +48,12 @@ const PeriodPieces=({navigation})=>{
         ListEmptyComponent={()=><Text style={{color:'white'}}>{'Loading'}</Text>}
         keyExtractor={(item,index)=>item.index}
         />
+        <YoungAdult navigation={navigation}/>
+        </>
     )
 }
 export default PeriodPieces
 
 
-const Styles= StyleSheet.create(
-    {
-        renderItemView: {
-            overflow: 'hidden',
-            height: 150,
-            width: 110,
-            
-          },
-          flatListImage: {
-            height: '100%',
-            width: '100%',
-            resizeMode: 'contain',
-            borderRadius:10
-          },
-    }
-)
 
 

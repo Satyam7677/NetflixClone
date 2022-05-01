@@ -1,7 +1,8 @@
 import React,{useState} from'react'
 import {View,SafeAreaView,Text,StyleSheet,Image,TouchableOpacity, ScrollView} from 'react-native'
-
+import ModalComponent from '../../components/modal';
 import MovieModal from '../../components/movieModal/movieModal';
+import BackToback from '../../components/backToback';
 
 
 const TVShows=({navigation})=>{
@@ -38,6 +39,8 @@ const TVShows=({navigation})=>{
 
     return (
         <SafeAreaView style={Styles.mainView}>
+
+<ModalComponent navigation={navigation} />
           <MovieModal navigation={navigation} modalVisible={modalVisible} setModalVisible={setModalVisible}/>
           <ScrollView
           bounces={false} stickyHeaderIndices={[1]}>
@@ -86,6 +89,7 @@ const TVShows=({navigation})=>{
             <Text style={Styles.playlistViewText}>{'info'}</Text>
           </TouchableOpacity>
         </View>
+        <BackToback navigation={navigation}/>
       
       </ScrollView>
 

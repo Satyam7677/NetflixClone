@@ -75,8 +75,10 @@ const SearchScreen=({navigation})=>{
 
       {text.length==0 && <FlatList
       data={top10India}
+      
       renderItem={renderItem}
-      ListHeaderComponent={ListHeaderComponent}/>}
+      ListHeaderComponent={ListHeaderComponent}
+      keyExtractor={(item,index)=>item.index}/>}
 
         </SafeAreaView>
     )
@@ -115,7 +117,7 @@ const Styles= StyleSheet.create(
         fontWeight:'700'
       },
       searchImage: {
-        height:'70%',
+        height:'45%',
         width:15,
         resizeMode:'stretch'
       },
@@ -130,7 +132,7 @@ const Styles= StyleSheet.create(
       },
       textInput:{
           backgroundColor:'transparent',
-          height:40,
+          height:'100%',
           width:'88%',
           padding:10,
           color:'white'
@@ -139,7 +141,8 @@ const Styles= StyleSheet.create(
           flexDirection:'row',
           backgroundColor:'#272727',
           alignItems:'center',
-          padding:10,
+          paddingHorizontal:10,
+          height:40
 
       },
       flatListTopText:{

@@ -1,12 +1,17 @@
 import React, { useState } from'react'
 import {View,SafeAreaView,Text,StyleSheet,Image,TouchableOpacity,ScrollView} from 'react-native'
 import MovieModal from '../../components/movieModal/movieModal'
+import { CategoryModal } from '../../components/movieModal/movieModal'
+import BackToback from '../../components/backToback'
+import ModalComponent from '../../components/modal'
 
 
 const MovieScreen=({navigation})=>{
 
   const [modalVisible,setModalVisible] = useState(false)
+  const [categoryModalVisible,setCategoryModalVisible]= useState(false)
   const movies=true
+  const categories=false
 
 
 
@@ -22,7 +27,9 @@ const MovieScreen=({navigation})=>{
         </TouchableOpacity>
 
         <TouchableOpacity
-        onPress={()=>navigation.navigate('MovieScreen')}
+        onPress={()=>{
+          categories=!categories
+          setModalVisible(!modalVisible)}}
         style={Styles.navigationButtonView}>
           <Text style={Styles.headerText}>{'All Categories '}</Text>
           <Image source={require('../../../../assets/image/down.png')}
@@ -36,8 +43,12 @@ const MovieScreen=({navigation})=>{
 
     return (
         <SafeAreaView style={Styles.mainView}>
+          
+          <ModalComponent navigation={navigation} />
 
-          <MovieModal navigation={navigation} modalVisible={modalVisible} setModalVisible={setModalVisible} movies={movies}/>
+          <MovieModal navigation={navigation} modalVisible={modalVisible} setModalVisible={setModalVisible} movies={movies} categories={categories}/>
+
+
           <ScrollView
           bounces={false} stickyHeaderIndices={[1]}>
             
@@ -90,7 +101,7 @@ const MovieScreen=({navigation})=>{
         </View>
 
 
-
+      <BackToback navigation={navigation}/>
 
 
       

@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {FlatList,StyleSheet, TouchableOpacity, Image, Text} from 'react-native'
 import { useSelector ,useDispatch} from "react-redux";
-
+import { Styles } from "../backToback";
+import BollywoodMovies from "../bollywoodMovies";
+import getBolllywoodMovies from "../bollywoodMovies/action";
 
 const Top10India=({navigation})=>{
     const {top10India,modalVisible}=useSelector((store)=>store.reducer)
     const dispatch= useDispatch()
+
+    useEffect(()=>{dispatch(getBolllywoodMovies())},[])
+
+
 
     const RenderItem = ({item}) => {
 
@@ -33,6 +39,8 @@ const Top10India=({navigation})=>{
       
 
     return(
+      <>
+      <Text style={Styles.flatListText}>{'Top 10 in India Today'}</Text>
         <FlatList
         data={top10India}
         renderItem={RenderItem}
@@ -40,26 +48,13 @@ const Top10India=({navigation})=>{
         ListEmptyComponent={()=><Text style={{color:'white'}}>{'Loading'}</Text>}
         keyExtractor={(item,index)=>item.index}
         />
+        <BollywoodMovies navigation={navigation}/>
+        </>
     )
 }
 export default Top10India
 
 
-const Styles= StyleSheet.create(
-    {
-        renderItemView: {
-            overflow: 'hidden',
-            height: 150,
-            width: 110,
-            
-          },
-          flatListImage: {
-            height: '100%',
-            width: '100%',
-            resizeMode: 'contain',
-            borderRadius:10
-          },
-    }
-)
+
 
 

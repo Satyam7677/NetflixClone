@@ -1,10 +1,13 @@
 import { View, Text,SafeAreaView ,StyleSheet,TouchableOpacity,Image, Alert,  TouchableWithoutFeedback} from 'react-native'
 import Modal from 'react-native-modal'
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Profile=({navigation})=> {
   const [modalVisible,setModalVisible] = useState(false)
   console.log('Object Alert is ', Alert)
+  const {isSignedIn} = useSelector(store=>store.signUpReducer)
+  const dispatch = useDispatch()
 
   const ModalComponent = ()=>
 { return(
@@ -25,7 +28,12 @@ const Profile=({navigation})=> {
         <Text style={Styles.buttonText}>{'Cancel'}</Text>
       </TouchableOpacity>
       <TouchableOpacity
-      onPress={()=>navigation.navigate('Initial Screen')}>
+      onPress={()=>{
+        dispatch({type:'Sign_In',payload:!isSignedIn})
+        setModalVisible(!modalVisible)
+        navigation.navigate('Initial Screen')
+        
+        }}>
         <Text style={Styles.buttonText}>{'Sign Out'}</Text>
       </TouchableOpacity>
       </View>

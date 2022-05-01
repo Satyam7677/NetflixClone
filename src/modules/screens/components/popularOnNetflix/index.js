@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {FlatList,StyleSheet, TouchableOpacity, Image, Text} from 'react-native'
 import { useSelector,useDispatch } from "react-redux";
-
+import { Styles } from "../backToback";
+import TVSciFi from "../tvSciFi";
+import getTVSciFi from "../tvSciFi/action";
 
 const PopularOnNetflix=({navigation})=>{
     const {popularOnNetflix,modalVisible}=useSelector((store)=>store.reducer)
     const dispatch= useDispatch()
+
+
+    useEffect(()=>{dispatch(getTVSciFi())},[])
 
     const RenderItem = ({item}) => {
 
@@ -33,6 +38,8 @@ const PopularOnNetflix=({navigation})=>{
       
 
     return(
+      <>
+      <Text style={Styles.flatListText}>{'Popular on Netflix'}</Text>
         <FlatList
         data={popularOnNetflix}
         renderItem={RenderItem}
@@ -40,26 +47,12 @@ const PopularOnNetflix=({navigation})=>{
         ListEmptyComponent={()=><Text style={{color:'white'}}>{'Loading'}</Text>}
         keyExtractor={(item,index)=>item.index}
         />
+        <TVSciFi navigation={navigation}/>
+        </>
     )
 }
 export default PopularOnNetflix
 
 
-const Styles= StyleSheet.create(
-    {
-        renderItemView: {
-            overflow: 'hidden',
-            height: 150,
-            width: 110,
-            
-          },
-          flatListImage: {
-            height: '100%',
-            width: '100%',
-            resizeMode: 'contain',
-            borderRadius:10
-          },
-    }
-)
 
 

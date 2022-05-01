@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {FlatList,StyleSheet, TouchableOpacity, Image, Text} from 'react-native'
 import { useSelector,useDispatch } from "react-redux";
+import { Styles } from "../backToback";
+import ReleasedPastYear from "../releasedPastYear";
+import getReleasedPastYear from "../releasedPastYear/action";
 
-
-const CrimeTV=()=>{
+const CrimeTV=({navigation})=>{
     const {crimeTV,modalVisible}=useSelector((store)=>store.reducer)
     const dispatch= useDispatch()
 
+
+    useEffect(()=>{dispatch(getReleasedPastYear())},[])
+
     const RenderItem = ({item}) => {
-        // const navigation = useNavigation()
+
         
         const changeModal=()=>{
 
@@ -34,6 +39,8 @@ const CrimeTV=()=>{
       
 
     return(
+      <>
+      <Text style={Styles.flatListText}>{'Crime TV Shows'}</Text>
         <FlatList
         data={crimeTV}
         renderItem={RenderItem}
@@ -41,26 +48,11 @@ const CrimeTV=()=>{
         keyExtractor={(item,index)=>item.index}
         horizontal
         />
+        <ReleasedPastYear navigation={navigation}/>
+        </>
     )
 }
 export default CrimeTV
-
-const Styles= StyleSheet.create(
-    {
-        renderItemView: {
-            overflow: 'hidden',
-            height: 150,
-            width: 110,
-            
-          },
-          flatListImage: {
-            height: '100%',
-            width: '100%',
-            resizeMode: 'contain',
-            borderRadius:10
-          },
-    }
-)
 
 
 
