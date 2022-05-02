@@ -4,6 +4,7 @@ import MovieModal from '../../components/movieModal/movieModal'
 import { CategoryModal } from '../../components/movieModal/movieModal'
 import BackToback from '../../components/backToback'
 import ModalComponent from '../../components/modal'
+import { ListComponent } from '../home'
 
 
 const MovieScreen=({navigation})=>{
@@ -79,26 +80,7 @@ const MovieScreen=({navigation})=>{
       <StickyHeaderComponent/>
 
 
-      <View style={Styles.playlistView}>
-          <TouchableOpacity>
-            <Image source={require('../../../../assets/image/plus.png')} />
-            <Text style={Styles.playlistViewText}>{'My List'}</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={Styles.playView}
-          onPress={()=>navigation.navigate('Video Player')}>
-            <Image
-              source={require('../../../../assets/image/play.png')}
-              style={{height: 20, width: 20}}
-            />
-            <Text>{'Play'}</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity>
-            <Image source={require('../../../../assets/image/info.png')} />
-            <Text style={Styles.playlistViewText}>{'info'}</Text>
-          </TouchableOpacity>
-        </View>
+      <ListComponent navigation={navigation}/>
 
 
       <BackToback navigation={navigation}/>

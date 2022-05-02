@@ -9,7 +9,7 @@ import {
   
 
 } from 'react-native';
-import Modal from 'react-native-modal'
+
 import React from 'react';
 import {useEffect} from 'react';
 
@@ -75,28 +75,9 @@ const HomeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <StickyHeaderComponent />
-        <View style={Styles.playlistView}>
-          <TouchableOpacity>
-            <Image source={require('../../../assets/image/plus.png')} />
-            <Text style={Styles.playlistViewText}>{'My List'}</Text>
-          </TouchableOpacity>
+       
+        <ListComponent navigation={navigation}/>
 
-          <TouchableOpacity style={Styles.playView}
-          onPress={()=>navigation.navigate('Video Player')}>
-            <Image
-              source={require('../../../assets/image/play.png')}
-              style={{height: 20, width: 20}}
-            />
-            <Text>{'Play'}</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity>
-            <Image source={require('../../../assets/image/info.png')} />
-            <Text style={Styles.playlistViewText}>{'info'}</Text>
-          </TouchableOpacity>
-        </View>
-    
-    
         <BackToBack navigation={navigation}/>
 
 
@@ -105,6 +86,36 @@ const HomeScreen = ({navigation}) => {
   );
 };
 export default HomeScreen;
+
+
+const ListComponent =({navigation})=>{
+  return (
+    <View style={Styles.playlistView}>
+    <TouchableOpacity
+    style={Styles.buttonView}>
+      <Image source={require('../../../assets/image/plus.png')} />
+      <Text style={Styles.playlistViewText}>{'My List'}</Text>
+    </TouchableOpacity>
+
+    <TouchableOpacity style={Styles.playView}
+    onPress={()=>navigation.navigate('Video Player')}>
+      <Image
+        source={require('../../../assets/image/play.png')}
+        style={{height: 20, width: 20}}
+      />
+      <Text>{'Play'}</Text>
+    </TouchableOpacity>
+
+    <TouchableOpacity
+    style={Styles.buttonView}>
+      <Image source={require('../../../assets/image/info.png')} />
+      <Text style={Styles.playlistViewText}>{'info'}</Text>
+    </TouchableOpacity>
+  </View>
+  )
+}
+
+export {ListComponent}
 
 const Styles = StyleSheet.create({
   screen1MainView: {
@@ -183,4 +194,7 @@ const Styles = StyleSheet.create({
     width: '100%',
     resizeMode: 'contain',
   },
+  buttonView:{
+    alignItems:'center'
+  }
 });
