@@ -18,7 +18,7 @@ const Home=({navigation})=>{
             <Stack.Screen name='TVShowScreen' component={TVShows} options={{presentation:'containedModal',animation:'fade'}}/>
 
             
-            {/* <Stack.Screen name='InfoScreen' component={InfoScreen}/> */}
+            <Stack.Screen name='InfoScreen' component={InfoScreen}/>
 
             
             

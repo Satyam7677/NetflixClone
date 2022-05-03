@@ -13,11 +13,11 @@ const reducer = (state=initialState, action)=>{
 
     switch(type){
         case 'comingSoon':
-            return {...state,comingSoon:[...state.comingSoon,...payload]}
+            return {...state,comingSoon:payload}
          case 'everyoneWatching':
-            return {...state,everyoneWatching:[...state.everyoneWatching,...payload]}
+            return {...state,everyoneWatching:payload}
         case 'top10':
-            return {...state,top10:[...state.top10,...payload]}
+            return {...state,top10:payload}
         default:
             return {...state}
     }

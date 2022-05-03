@@ -12,10 +12,11 @@ import {
 } from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import MoreLikeThis from '../components/moreLikeThis';
+import Trailers from '../components/trailers';
 import ModalComponent from '../components/modal';
 import { useDispatch, useSelector } from 'react-redux';
 
-const Stack = createMaterialTopTabNavigator();
+const TopTab = createMaterialTopTabNavigator();
 
 const {height, width} = Dimensions.get('screen');
 
@@ -153,6 +154,7 @@ const InfoScreen = ({navigation, route}) => {
       <View style={{width: width, height: height / 4,marginBottom:10}}>
         <Image
           source={{uri: `https://image.tmdb.org/t/p/w500${modalData.backdrop_path}`}}
+          resizeMode={'stretch'}
           style={Styles.imageStyle}
         />
       </View>
@@ -173,7 +175,7 @@ export default InfoScreen;
 const RouteComponent=()=>{
 return (
     <SafeAreaView style={{height:height*2}}>
-        <Stack.Navigator
+        <TopTab.Navigator
             transitionStyle="scroll"
             initialRouteName="More"
             screenOptions={{
@@ -181,20 +183,20 @@ return (
               tabBarLabelStyle: {color: 'white'},
               tabBarIndicatorStyle: {backgroundColor: 'red'},
             }}>
-            <Stack.Screen
+            <TopTab.Screen
               name="More"
               component={MoreLikeThis}
               options={{
                 tabBarLabel: 'MORE LIKE THIS',
-                tabBarIndicatorStyle: 'red',
+
               }}
             />
-            <Stack.Screen
+            <TopTab.Screen
               name="Trailers"
               component={Trailers}
               options={{tabBarLabel: 'TRAILERS & MORE'}}
             />
-          </Stack.Navigator>
+          </TopTab.Navigator>
     </SafeAreaView>
 )
 }
@@ -203,13 +205,7 @@ return (
 
 
 
-const Trailers = () => {
-  return (
-    <View>
-      <Text style={{color: 'white'}}>{'MoreLikeThis'}</Text>
-    </View>
-  );
-};
+
 
 const Styles = StyleSheet.create({
   mainView: {
@@ -245,7 +241,7 @@ const Styles = StyleSheet.create({
   imageStyle: {
     height: '100%',
     width: '100%',
-    resizeMode: 'stretch',
+    // resizeMode: 'stretch',
   },
   movieName: {
     color: 'white',

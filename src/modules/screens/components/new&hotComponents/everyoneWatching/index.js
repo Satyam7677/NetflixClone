@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {FlatList, View,Image, StyleSheet,Text, TouchableOpacity} from 'react-native'
 import { useSelector } from "react-redux";
 
@@ -7,14 +7,51 @@ import Top10 from "../top10";
 
 const EveryoneWatching=({navigation})=>{
     const {everyoneWatching} = useSelector((store)=>store.newHotReducer)
+    
 
-    console.log('EveryOne watching', everyoneWatching)
+    // myFun(ref)
+   
+
 
     const RenderItem=({item})=>{
         // const {navigation} = useNavigation()
     
         return(
-            <View style={Styles.renderItemView}>
+            <CardComponent item={item}/>
+        )
+    }
+
+  
+  
+
+  
+    return(
+        <FlatList
+
+        data={everyoneWatching}
+        renderItem={RenderItem}
+        ListHeaderComponent={ListHeader}
+        ListFooterComponent={<Top10 navigation={navigation} />}
+        keyExtractor={(item,index)=>item.index}
+        />
+
+    )
+}
+export default EveryoneWatching
+   
+const ListHeader = ()=>{
+    return (
+        <View style={Styles.comingSoonHeaderView} >
+          <Image source={require('../../../../../assets/image/fire.png')} style={Styles.headerImageStyle}/>
+          <Text style={Styles.headerText}>{"Everyone's watching"}</Text>
+        </View>
+    )
+}
+
+
+const CardComponent=({item})=>{
+    return(
+        <View style={Styles.renderItemView}>
                 <View style={Styles.calenderView}>
                 <Text style={Styles.monthText}>{'Months'}</Text>
                 <Text style={Styles.dateText}>{'Date'}</Text>
@@ -60,33 +97,9 @@ const EveryoneWatching=({navigation})=>{
             
           </View>
           </View>
-        )
-    }
-
-  
-     
-    const ListHeader = ()=>{
-    return (
-        <View style={Styles.comingSoonHeaderView} >
-          <Image source={require('../../../../../assets/image/fire.png')} style={Styles.headerImageStyle}/>
-          <Text style={Styles.headerText}>{"Everyone's watching"}</Text>
-        </View>
     )
 }
-
-  
-    return(
-        <FlatList
-        data={everyoneWatching}
-        renderItem={RenderItem}
-        ListHeaderComponent={ListHeader}
-        ListFooterComponent={<Top10 navigation={navigation}/>}
-        keyExtractor={(item,index)=>item.index}
-        />
-
-    )
-}
-export default EveryoneWatching
+export {CardComponent}
 
 const Styles = StyleSheet.create(
     {
@@ -94,7 +107,7 @@ const Styles = StyleSheet.create(
             flexDirection:'row',
             alignItems:'center',
             height:40,
-            width:140,
+            width:190,
             justifyContent:'space-between'
         },
         headerText:{

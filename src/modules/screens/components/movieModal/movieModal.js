@@ -10,6 +10,7 @@ const MovieModal =({navigation,modalVisible,setModalVisible ,movies,categories})
 
         <Modal
         isVisible={modalVisible}
+        useNativeDriver={true}
         >
             
            {!categories && <View style={Styles.optionViewStyle}>
