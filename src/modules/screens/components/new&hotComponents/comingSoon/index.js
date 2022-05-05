@@ -16,7 +16,7 @@ const ComingSoon=({navigation, myFun1})=>{
         // const {navigation} = useNavigation()
     
         return(
-            <CardComponent item={item}/>
+            <CardComponent item={item} navigation={navigation}/>
         )
     }
 

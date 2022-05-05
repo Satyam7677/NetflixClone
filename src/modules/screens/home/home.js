@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  ImageBackground,
   
 
 } from 'react-native';
@@ -51,11 +52,15 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1,backgroundColor:'black'}}>
-     
-        <ModalComponent navigation={navigation} />
-        
+      <ModalComponent navigation={navigation} /> 
+      <ScrollView bounces={false} stickyHeaderIndices={[1]} >
       
-      <ScrollView bounces={false} stickyHeaderIndices={[1]}>
+
+
+
+      
+        {/* <View style={Styles.posterImageView}> */}
+        {/* <ImageBackground source={{uri:'https://cdn.shopify.com/s/files/1/0057/3728/3618/products/reminiscence_1ob6upeb-advance_480x.progressive.jpg?v=1629381406'}} style={Styles.posterImage} > */}
         <View style={Styles.HomeTopView}>
           <Image
             source={require('../../../assets/image/netflix.png')}
@@ -74,14 +79,20 @@ const HomeScreen = ({navigation}) => {
             />
           </TouchableOpacity>
         </View>
-        <StickyHeaderComponent />
+      
+        {/* </ImageBackground>
        
+        
+        </View> */}
+        <StickyHeaderComponent />
+     
         <ListComponent navigation={navigation}/>
 
         <BackToBack navigation={navigation}/>
 
 
       </ScrollView>
+      
     </SafeAreaView>
   );
 };
@@ -196,5 +207,15 @@ const Styles = StyleSheet.create({
   },
   buttonView:{
     alignItems:'center'
+  },
+  posterImageView:{
+    height:'15%',
+    alignItems:'center',
+    
+  },
+  posterImage:{
+    height:'100%',
+    width:'100%',
+    resizeMode:'stretch'
   }
 });

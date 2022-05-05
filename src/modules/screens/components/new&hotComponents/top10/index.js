@@ -16,7 +16,7 @@ const Top10=({navigation})=>{
         // const {navigation} = useNavigation()
     
         return(
-           <CardComponent item={item}/>
+           <CardComponent item={item} navigation={navigation}/>
         )
     }
 

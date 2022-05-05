@@ -85,7 +85,7 @@ const checkList=()=>{
               </View>
               
               <TouchableOpacity onPress={changeModal}
-              style={{height:20,width:20,borderRadius:100,backgroundColor:'silver',overflow:'hidden'}}
+              style={{height:20,width:20,borderRadius:100,backgroundColor:'silver',overflow:'hidden',position:'absolute', right:0}}
               >
                 <Image source={require('../../../assets/image/close.png')}
                 style={{height:'100%',width:'100%',resizeMode:'contain'}}/>

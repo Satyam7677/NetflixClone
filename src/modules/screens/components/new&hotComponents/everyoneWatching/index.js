@@ -9,15 +9,15 @@ const EveryoneWatching=({navigation})=>{
     const {everyoneWatching} = useSelector((store)=>store.newHotReducer)
     
 
-    // myFun(ref)
+    
    
 
 
     const RenderItem=({item})=>{
-        // const {navigation} = useNavigation()
+        
     
         return(
-            <CardComponent item={item}/>
+            <CardComponent item={item} navigation={navigation}/>
         )
     }
 
@@ -49,7 +49,7 @@ const ListHeader = ()=>{
 }
 
 
-const CardComponent=({item})=>{
+const CardComponent=({item,navigation})=>{
     return(
         <View style={Styles.renderItemView}>
                 <View style={Styles.calenderView}>
@@ -65,7 +65,7 @@ const CardComponent=({item})=>{
               style={Styles.flatListImage}
             />
             </View>
-            <View style={Styles.descriptionView}>
+            {/* <View style={Styles.descriptionView}> */}
                 <View style={Styles.movieHeaderView}>
 
             <TouchableOpacity
@@ -73,6 +73,7 @@ const CardComponent=({item})=>{
             <Text style={Styles.movieName}>{item.title}</Text>
             </TouchableOpacity>
 
+            <View style={Styles.remindInfoView}>
             <TouchableOpacity
             style={Styles.buttonView}>
                 <Image source={require('../../../../../assets/image/bell.png')}/>
@@ -84,18 +85,20 @@ const CardComponent=({item})=>{
                 <Image source={require('../../../../../assets/image/info.png')} />
                 <Text style={Styles.buttonText}>{'Info'}</Text>
             </TouchableOpacity>
+            </View>
 
             </View>
 
 
             <TouchableOpacity
-             onPress={()=>navigation.navigate('Video Player')}>
-            <Text style={Styles.overViewText}>{item.overview}</Text>
+             onPress={()=>navigation.navigate('Video Player')}
+             >
+            <Text style={Styles.overViewText} numberOfLines={4}>{item.overview}</Text>
             </TouchableOpacity>
 
             </View>
             
-          </View>
+          {/* </View> */}
           </View>
     )
 }
@@ -139,7 +142,7 @@ const Styles = StyleSheet.create(
           renderItemView:{
               flexDirection:'row',
               justifyContent:'space-between',
-              height:320
+              height:400
 
           },
           monthText:{
@@ -170,7 +173,8 @@ const Styles = StyleSheet.create(
           },
           overViewText:{
               color:'white',
-              fontSize:13
+              fontSize:13,
+              
           },
           movieHeaderView:{
               flexDirection:'row',
@@ -183,6 +187,9 @@ const Styles = StyleSheet.create(
           buttonView:{
               justifyContent:'center',
               alignItems:'center'
+          },
+          remindInfoView:{
+              flexDirection:'row'
           }
     }
 )
