@@ -9,7 +9,7 @@ import MovieModal from "../components/movieModal/movieModal";
 const Stack = createNativeStackNavigator()
 const Home=({navigation})=>{
     return(
-        <Stack.Navigator screenOptions={{headerShown:false}}>
+        <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName='HomeScreen'>
             <Stack.Screen name='HomeScreen' component={HomeScreen}/>
 
             <Stack.Screen name='MovieScreen' component={MovieScreen} options={{presentation:'containedModal',animation:'fade'}}/>

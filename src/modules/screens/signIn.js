@@ -7,6 +7,7 @@ const SignIn = ({navigation})=>{
    const dispatch = useDispatch()
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
+    const [warning,setWarning] = useState(false)
     const {data,isSignedIn} = useSelector((store)=>store.signUpReducer)
     console.log("Inside SignIN",data)
 
@@ -14,10 +15,12 @@ const SignIn = ({navigation})=>{
       if( data.find(i=>i.email==email && i.password==password))
         {   
             dispatch({type:'Sign_In', payload:!isSignedIn})
-            navigation.navigate('Screen1')}
-        // navigation.navigate('Profile')
+            navigation.navigate('Screen1')
+        }
+        
         else
-        Alert.alert('Wrong credentials')
+        setWarning(!warning)
+            
     }
     const onEmailChange=(text)=>{
         setEmail(text)
@@ -41,18 +44,23 @@ const SignIn = ({navigation})=>{
             placeholderTextColor='#696969'
             selectionColor='#ABA5A5'
             style={Styles.textInput}
-            onChangeText={onEmailChange}/>
+            onChangeText={onEmailChange}
+            autoCapitalize='none'
+            />
+            {warning && <Text style={Styles.warning}>{"Sorry, we can't find an account with this email address."}</Text>}
+            
 
             <TextInput
             placeholder="Password"
             placeholderTextColor='#696969'
             selectionColor='#ABA5A5'
             onChangeText={onPasswordChange}
-            style={Styles.textInput}/>
+            style={Styles.textInput}
+            secureTextEntry/>
 
 
-            <TouchableOpacity style={Styles.buttonView}
-            onPress={checkAuth}>
+            <TouchableOpacity style={{...Styles.buttonView,backgroundColor:(email.length>4 && password.length>3)?'red':'black'}}
+            onPress={checkAuth} disabled={!(email.length>4 && password.length>3)}>
                 <Text style={Styles.buttonText}>{'Sign In'}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={Styles.needHelpView}>
@@ -154,6 +162,9 @@ const Styles = StyleSheet.create(
         learnMoreView:{
             marginTop:30,
             alignItems:'center'
+        },
+        warning:{
+            color:'orange'
         }
 
 

@@ -1,16 +1,23 @@
 import React from 'react'
+import { useEffect } from 'react'
 import {View, Text, SafeAreaView, StyleSheet, Image} from 'react-native'
 import { useSelector } from 'react-redux'
 
 
 const Splash=({navigation})=>{
     const {isSignedIn} = useSelector(store=>store.signUpReducer)
-    setTimeout(()=>{
+
+    useEffect(()=>
+    {
         if(isSignedIn)
-        navigation.navigate('Screen1')
+        {setTimeout(()=>{
+            navigation.navigate('Screen1')},1000)}
         else
-        navigation.navigate('Initial Screen')
-    }, 1000)
+        {setTimeout(()=>{
+            navigation.navigate('Initial Screen')},1000)}
+    },[])
+   
+    
     return(
         <SafeAreaView style ={Styles.splashMainView}>
             <View style={Styles.viewSplashImage}>

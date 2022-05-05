@@ -6,20 +6,31 @@ import { useDispatch, useSelector } from "react-redux";
 const EnterEmail=({navigation})=>{
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
+    const [warning,setWarning] = useState(false)
+
     const dispatch = useDispatch()
     const {data} = useSelector((store)=>store.signUpReducer)
     console.log('data', data)
 
+    
+
     const onEmailChange=(text)=>{
         setEmail(text)
+        let reg1 = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+        if(reg1.test(email))
+        setWarning(false)
+        else
+        setWarning(true)
+       
+
     }
     const onPasswordChange=(text)=>{
         setPassword(text)
     }
     const onContinue=()=>{
-        dispatch({type:'addData', payload:{email,password}})
         navigation.navigate('Sign In')
-        console.log(data)
+        dispatch({type:'addData', payload:{email,password}})
+        
     }
     return(
         <SafeAreaView style={Styles.mainView}>
@@ -43,10 +54,15 @@ const EnterEmail=({navigation})=>{
         <Text style={Styles.description}>{"Just two more steps and you're done! We hate paperwork, too."}</Text>
         <Text style={{...Styles.headText,marginTop:15}}>{'Create your account.'}</Text>
         <View style={Styles.formView}>
+
             <TextInput
             placeholder="Email"
-            style={Styles.textInput}
-            onChangeText={onEmailChange}/>
+            style={{...Styles.textInput,borderColor:warning?'red':'black'}}
+            onChangeText={onEmailChange}
+            autoCapitalize='none'/>
+            {warning && <Text style={Styles.warningText}>
+                    {'Email is required'}
+              </Text>}
 
             <TextInput
             placeholder="Password"
@@ -128,6 +144,9 @@ const Styles = StyleSheet.create(
         text:{
             color:'white',
             fontWeight:'500'
+        },
+        warningText:{
+          color:'red'
         }
     }
 )

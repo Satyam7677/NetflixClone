@@ -10,7 +10,7 @@ import Downloads from './screens/downloads'
 export default function Screen1() {
     const BottomTab=createMaterialBottomTabNavigator()
   return (
-        <BottomTab.Navigator  shifting={false} barStyle={{backgroundColor:'#181718',height:100}} screenOptions={{headerShown:false }} >
+        <BottomTab.Navigator  shifting={false} barStyle={{backgroundColor:'#181718',height:100}} screenOptions={{headerShown:false }} initialRouteName='Home'>
             <BottomTab.Screen name = 'Home' component={Home} options={{tabBarIcon:({focused})=>(
                <Image source ={focused? require('../../src/assets/image/home.png'):require('../../src/assets/image/homeUnfocussed.png')}/>)}}/>
                

@@ -20,6 +20,8 @@ import FastLaugh from './screens/fastlaughs'
 import MyList from './screens/myList'
 import SearchScreen from './screens/search'
 import InfoScreen from './screens/home/info'
+import EnterEmail from './screens/setupNavigation/Screen/enterEmail'
+import SetUp from './screens/setupNavigation/Screen/setUp'
 
 
 const Tab = createNativeStackNavigator()
@@ -35,7 +37,8 @@ const Router = ()=>{
             <Tab.Screen name='Sign In' component={SignIn}/>
             <Tab.Screen name='SetUpRouter' component={SetUpRouter}/>
             <Tab.Screen name ='MyList' component={MyList}/>
-            <Tab.Screen name = 'Video Player' component={VideoScreen}/>
+            <Tab.Screen name='SetUp' component={SetUp}/>
+           
             <Tab.Screen name = 'SearchScreen' component={SearchScreen}/>
             <Tab.Screen name = 'InfoScreen' component={InfoScreen}/>
         </Tab.Navigator>
@@ -45,9 +48,7 @@ const Router = ()=>{
 
 }
 
-// #181718
 
-// export {Screen1}
 
 export default Router
 

@@ -61,6 +61,8 @@ const HomeScreen = ({navigation}) => {
       
         {/* <View style={Styles.posterImageView}> */}
         {/* <ImageBackground source={{uri:'https://cdn.shopify.com/s/files/1/0057/3728/3618/products/reminiscence_1ob6upeb-advance_480x.progressive.jpg?v=1629381406'}} style={Styles.posterImage} > */}
+
+        
         <View style={Styles.HomeTopView}>
           <Image
             source={require('../../../assets/image/netflix.png')}
